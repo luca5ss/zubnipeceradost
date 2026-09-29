@@ -1,0 +1,236 @@
+đ* Zubní péče Radost */
+* { box-sizing: border-box; }
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f0f5f9;
+  color: #222;
+  line-height: 1.55;
+}
+
+header {
+  background: linear-gradient(135deg, #1565a0 0%, #0d4a75 100%);
+  color: white;
+  padding: 1.1rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+header h1 {
+  margin: 0 0 0.45rem 0;
+  font-size: 1.75rem;
+  letter-spacing: 0.3px;
+}
+
+nav a {
+  color: #d6ebf8;
+  text-decoration: none;
+  margin-right: 0.35rem;
+  font-size: 0.98rem;
+}
+
+nav a:hover { color: #fff; text-decoration: underline; }
+nav a.active { color: #fff; font-weight: bold; text-decoration: underline; }
+
+main {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 2rem;
+}
+
+section {
+  background: white;
+  padding: 1.35rem 1.5rem;
+  margin-bottom: 1.4rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+h2 {
+  color: #1565a0;
+  margin-top: 0;
+  border-bottom: 2px solid #d4e8f5;
+  padding-bottom: 0.35rem;
+  font-size: 1.35rem;
+}
+
+h3 { color: #1565a0; margin-bottom: 0.5rem; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+
+th, td {
+  border: 1px solid #c5d9e8;
+  padding: 0.55rem 0.75rem;
+  text-align: left;
+}
+
+th {
+  background: #1565a0;
+  color: white;
+}
+
+tr:nth-child(even) { background: #f3f9fc; }
+
+figure {
+  display: inline-block;
+  margin: 0.4rem 0.9rem 1rem 0;
+  vertical-align: top;
+  max-width: 270px;
+}
+
+figure img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid #dde8f0;
+  display: block;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+figcaption {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 0.4rem;
+}
+
+ul { padding-left: 1.35rem; }
+
+footer {
+  background: #0d4a75;
+  color: #e8f2fa;
+  text-align: center;
+  padding: 1.1rem;
+  margin-top: 1.5rem;
+  font-size: 0.92rem;
+}
+
+footer p { margin: 0; }
+
+a[href^="mailto:"],
+a[href^="tel:"] {
+  color: #1565a0;
+  font-weight: bold;
+}
+
+/* --- Rezervace --- */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.25rem;
+}
+
+.form-grid .full { grid-column: 1 / -1; }
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+  font-size: 0.92rem;
+  color: #333;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+select,
+textarea {
+  width: 100%;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid #b8cddc;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: #fafcfe;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #1565a0;
+  box-shadow: 0 0 0 3px rgba(21,101,160,0.15);
+}
+
+.time-slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.3rem;
+}
+
+.time-slots label.slot {
+  font-weight: normal;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid #b8cddc;
+  border-radius: 6px;
+  background: #f7fafc;
+  cursor: pointer;
+  font-size: 0.92rem;
+}
+
+.time-slots label.slot:hover { border-color: #1565a0; background: #eaf4fb; }
+.time-slots input { margin: 0; }
+.time-slots input:checked + span,
+.time-slots label.slot:has(input:checked) {
+  background: #1565a0;
+  color: white;
+  border-color: #1565a0;
+}
+
+.time-slots label.slot:has(input:checked) span { color: white; }
+
+button[type="submit"] {
+  background: #1565a0;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.6rem;
+  font-size: 1.05rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button[type="submit"]:hover { background: #0d4a75; }
+
+.hint {
+  font-size: 0.88rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+.confirm-box {
+  display: none;
+  background: #e8f7ee;
+  border: 1px solid #8bc9a0;
+  border-radius: 8px;
+  padding: 1.1rem 1.3rem;
+  margin-top: 1.2rem;
+  color: #1a5c32;
+}
+
+.confirm-box.show { display: block; }
+
+.confirm-box h3 { color: #1a5c32; margin-top: 0; }
+
+.info-banner {
+  background: #e8f2fa;
+  border-left: 4px solid #1565a0;
+  padding: 0.85rem 1.1rem;
+  margin-bottom: 1.2rem;
+  border-radius: 0 6px 6px 0;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 600px) {
+  .form-grid { grid-template-columns: 1fr; }
+  figure { max-width: 100%; }
+}
