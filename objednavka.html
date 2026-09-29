@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zubní péče Radost – objednání termínu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Zubní péče Radost</h1>
+    <nav>
+      <a href="index.html">Úvod</a> |
+      <a href="cenik.html">Ceník a galerie</a> |
+      <a href="objednavka.html" class="active">Objednání</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Online objednání termínu</h2>
+
+      <div class="info-banner">
+        Vyberte si volný termín. Po odeslání vás budeme do 1 pracovního dne kontaktovat
+        pro potvrzení. V případě akutních potíží volejte přímo na
+        <a href="tel:+420777123456">777 123 456</a>.
+      </div>
+
+      <form id="rezervace" action="#" method="get">
+        <div class="form-grid">
+          <div>
+            <label for="jmeno">Jméno a příjmení *</label>
+            <input type="text" id="jmeno" name="jmeno" required placeholder="Jan Novák" autocomplete="name">
+          </div>
+          <div>
+            <label for="telefon">Telefon *</label>
+            <input type="tel" id="telefon" name="telefon" required placeholder="777 123 456" autocomplete="tel">
+          </div>
+          <div>
+            <label for="email">E-mail *</label>
+            <input type="email" id="email" name="email" required placeholder="jan.novak@email.cz" autocomplete="email">
+          </div>
+          <div>
+            <label for="typ">Typ ošetření *</label>
+            <select id="typ" name="typ" required>
+              <option value="">— vyberte —</option>
+              <option value="prohlidka">Preventivní prohlídka</option>
+              <option value="hygiena">Dentální hygiena</option>
+              <option value="plomba">Plomba / ošetření kazu</option>
+              <option value="bolest">Bolest zubu (akutní)</option>
+              <option value="beleni">Bělení zubů</option>
+              <option value="jine">Jiné / konzultace</option>
+            </select>
+          </div>
+          <div>
+            <label for="datum">Preferovaný den *</label>
+            <input type="date" id="datum" name="datum" required>
+            <p class="hint">Objednávat lze nejdříve na zítra. Ordinace je otevřená Po–Pá.</p>
+          </div>
+          <div class="full">
+            <label>Preferovaný čas *</label>
+            <div class="time-slots" id="slots">
+              <label class="slot"><input type="radio" name="cas" value="08:00" required> <span>8:00</span></label>
+              <label class="slot"><input type="radio" name="cas" value="08:30"> <span>8:30</span></label>
+              <label class="slot"><input type="radio" name="cas" value="09:00"> <span>9:00</span></label>
+              <label class="slot"><input type="radio" name="cas" value="09:30"> <span>9:30</span></label>
+              <label class="slot"><input type="radio" name="cas" value="10:00"> <span>10:00</span></label>
+              <label class="slot"><input type="radio" name="cas" value="10:30"> <span>10:30</span></label>
+              <label class="slot"><input type="radio" name="cas" value="11:00"> <span>11:00</span></label>
+              <label class="slot"><input type="radio" name="cas" value="11:30"> <span>11:30</span></label>
+              <label class="slot"><input type="radio" name="cas" value="13:00"> <span>13:00</span></label>
+              <label class="slot"><input type="radio" name="cas" value="13:30"> <span>13:30</span></label>
+              <label class="slot"><input type="radio" name="cas" value="14:00"> <span>14:00</span></label>
+              <label class="slot"><input type="radio" name="cas" value="14:30"> <span>14:30</span></label>
+              <label class="slot"><input type="radio" name="cas" value="15:00"> <span>15:00</span></label>
+              <label class="slot"><input type="radio" name="cas" value="15:30"> <span>15:30</span></label>
+              <label class="slot"><input type="radio" name="cas" value="16:00"> <span>16:00</span></label>
+              <label class="slot"><input type="radio" name="cas" value="16:30"> <span>16:30</span></label>
+            </div>
+            <p class="hint">Zeleně označené termíny jsou po odeslání předběžně rezervované do potvrzení telefonem.</p>
+          </div>
+          <div class="full">
+            <label for="poznamka">Poznámka (nepovinné)</label>
+            <textarea id="poznamka" name="poznamka" rows="3" placeholder="Např. bolest při skusu, první návštěva, alergie na léky…"></textarea>
+          </div>
+          <div class="full">
+            <button type="submit">Odeslat žádost o termín</button>
+          </div>
+        </div>
+      </form>
+
+      <div class="confirm-box" id="potvrzeni" role="status">
+        <h3>Žádost byla odeslána</h3>
+        <p id="potvrzeni-text"></p>
+        <p>Do 1 pracovního dne vás budeme kontaktovat na uvedené telefonní číslo. Děkujeme.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 · web vytvořil Lukáš Vopálenský (26)</p>
+  </footer>
+
+  <script>
+    (function () {
+      var datum = document.getElementById('datum');
+      var form = document.getElementById('rezervace');
+      var potvrzeni = document.getElementById('potvrzeni');
+      var potvrzeniText = document.getElementById('potvrzeni-text');
+
+      // minimální datum = zítra
+      var dnes = new Date();
+      dnes.setDate(dnes.getDate() + 1);
+      var yyyy = dnes.getFullYear();
+      var mm = String(dnes.getMonth() + 1).padStart(2, '0');
+      var dd = String(dnes.getDate()).padStart(2, '0');
+      datum.min = yyyy + '-' + mm + '-' + dd;
+
+      // maximálně 60 dní dopředu
+      var max = new Date();
+      max.setDate(max.getDate() + 60);
+      datum.max = max.getFullYear() + '-' +
+        String(max.getMonth() + 1).padStart(2, '0') + '-' +
+        String(max.getDate()).padStart(2, '0');
+
+      // zakázat víkendy
+      datum.addEventListener('change', function () {
+        if (!this.value) return;
+        var d = new Date(this.value + 'T12:00:00');
+        var den = d.getDay(); // 0 = ne, 6 = so
+        if (den === 0 || den === 6) {
+          alert('Ordinace je o víkendu zavřená. Vyberte prosím pracovní den (Po–Pá).');
+          this.value = '';
+        }
+      });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var jmeno = document.getElementById('jmeno').value.trim();
+        var den = datum.value;
+        var casInput = form.querySelector('input[name="cas"]:checked');
+        var cas = casInput ? casInput.value : '';
+        var typ = document.getElementById('typ');
+        var typText = typ.options[typ.selectedIndex].text;
+
+        // formát data CZ
+        var casti = den.split('-');
+        var denCz = casti[2] + '.' + casti[1] + '.' + casti[0];
+
+        potvrzeniText.textContent =
+          'Dobrý den, ' + jmeno + '. Vaše žádost o termín ' +
+          typText.toLowerCase() + ' na ' + denCz + ' v ' + cas +
+          ' byla přijata.';
+
+        potvrzeni.classList.add('show');
+        potvrzeni.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        form.reset();
+        // obnovit min datum po resetu
+        datum.min = yyyy + '-' + mm + '-' + dd;
+      });
+    })();
+  </script>
+
+</body>
+</html>
